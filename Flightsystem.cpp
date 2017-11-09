@@ -182,11 +182,12 @@ int Flightsystem::GetnumAircraftInSector_() const {
 
 }
 
-// Adding an Aircraft
+// Adding an Aircraft to the list
 
-void Flightsystem::addAircraft(std::string flightNumber, std::string airline, std::string airlineType, int altitude, int groundSpeed, std::string gridReference, int heading) {
-	Aircraft a(flightNumber, airline, airlineType, altitude, groundSpeed, gridReference, heading)
+void Flightsystem::addAircraft_(std::string flightNumber, std::string airline, std::string airlineType, int altitude, int groundSpeed, std::string gridReference, int heading) {
+	Aircraft A(flightNumber, airline, airlineType, altitude, groundSpeed, gridReference, heading);
 }
+
 bool isFound = false
 for (int i = 0; i < aircraftList_.size(); i++) {
 	if (aircraftList_[i].GetFlightNumber() == flightNumber) {
@@ -194,9 +195,19 @@ for (int i = 0; i < aircraftList_.size(); i++) {
 	}
 }
 
-if (isFound = true) {
+if (isFound == true) {
 	std::cout << "Flight " << flightNumber << " is already in the system" << std::endl;
 }
 else {
-	aircraftList_.push_back(Aircraft(a));
+	aircraftList_.push_back(Aircraft(s1));
+	std::cout << "You have added Flight: " << flightNumber << " to the system" << std::endl;
 }
+}
+
+std::vector<Aircraft> Flightsystem::listAllAircraft() {
+	return aircraftList;
+}
+
+// Listing all Aircrafts in the system
+
+std::vector<Aircraft> Flightsystem:: listAllAircraft_
