@@ -8,7 +8,9 @@
 
 #pragma once
 
+#include"Flightsystem.h"
 
+#include"Aircraft.h"
 
 #include<iostream>
 
@@ -16,184 +18,24 @@
 
 #include<vector>
 
-#include"Flightsystem.h"
 
 
-
-Flightsystem::~Flightsystem()
-
-{
-
-}
-
-
-
-//Getters and Setters for Flightsystem
-
-
-
-Flightsystem::Flightsystem(std::vector<Aircraft> aircraft, std::vector<Aircraft> aircraftList, std::string addAircraft, std::string removeAircraft, std::string listAllAircraft,
-
-	std::string listAllCruisingAircraft, std::string changeHeading, std::string getHeading, int changeAltitude, int getAltitude, int numAircraftInSector) :
-
-	addAircraft_{ addAircraft }, removeAircraft_{ removeAircraft }, listAllAircraft_{ listAllAircraft }, listAllCruisingAircraft_{ listAllCruisingAircraft },
-
-	changeHeading_{ changeHeading }, getHeading_{ getHeading }, changeAltitude_{ changeAltitude }, getAltitude_{ getAltitude }, numAircraftInSector_{ numAircraftInSector } {}
-
-
-
-void Flightsystem::SetaddAircraft_(std::string addAircraft) {
-
-	addAircraft_ = addAircraft;
-
-}
-
-std::string Flightsystem::GetaddAircraft_() const {
-
-	return addAircraft_;
-
-}
-
-
-
-
-
-void Flightsystem::SetremoveAircraft_(std::string removeAircraft) {
-
-	removeAircraft_ = removeAircraft;
-
-}
-
-std::string Flightsystem::GetremoveAircraft_() const {
-
-	return removeAircraft_;
-
-}
-
-
-
-
-
-void Flightsystem::SetlistAllAircraft_(std::string listAllAircraft) {
-
-	listAllAircraft_ = listAllAircraft;
-
-}
-
-std::string Flightsystem::GetlistAllAircraft_() const {
-
-	return listAllAircraft_;
-
-}
-
-
-
-
-
-void Flightsystem::SetlistAllCruisingAircraft_(std::string listAllCruisingAircraft) {
-
-	listAllCruisingAircraft_ = listAllCruisingAircraft;
-
-}
-
-std::string Flightsystem::GetlistAllCruisingAircraft_() const {
-
-	return listAllCruisingAircraft_;
-
-}
-
-
-
-
-
-void Flightsystem::SetchangeHeading_(std::string changeHeading) {
-
-	changeHeading_ = changeHeading;
-
-}
-
-std::string Flightsystem::GetchangeHeading_() const {
-
-	return changeHeading_;
-
-}
-
-
-
-
-
-void Flightsystem::SetgetHeading_(std::string getHeading) {
-
-	getHeading_ = getHeading;
-
-}
-
-std::string Flightsystem::GetgetHeading_() const {
-
-	return getHeading_;
-
-}
-
-
-
-
-
-void Flightsystem::SetchangeAltitude_(int changeAltitude) {
-
-	changeAltitude_ = changeAltitude;
-
-}
-
-int Flightsystem::GetchangeAltitude_() const {
-
-	return changeAltitude_;
-
-}
-
-
-
-
-
-void Flightsystem::SetgetAltitude_(int getAltitude) {
-
-	getAltitude_ = getAltitude;
-
-}
-
-int Flightsystem::GetgetAltitude_() const {
-
-	return getAltitude_;
-
-}
-
-
-
-
-
-void Flightsystem::SetnumAircraftInSector_(int numAircraftInSector) {
-
-	numAircraftInSector_ = numAircraftInSector;
-
-}
-
-int Flightsystem::GetnumAircraftInSector_() const {
-
-	return numAircraftInSector_;
-
-}
 
 // Adding an Aircraft to the list
 
-void Flightsystem::addAircraft_(std::string flightNumber, std::string airline, std::string airlineType, int altitude, int groundSpeed, std::string gridReference, int heading) {
-	Aircraft A(flightNumber, airline, airlineType, altitude, groundSpeed, gridReference, heading);
+void Flightsystem::addAircraft_(std::string flightNumber, std::string airline, std::string airlineType, int altitude, int speed, std::string grid, int heading) {
+	Aircraft s1(flightNumber, airline, airlineType, altitude, speed, grid, heading);
 }
 
-bool isFound = false
+
+bool isFound = false;
 for (int i = 0; i < aircraftList_.size(); i++) {
-	if (aircraftList_[i].GetFlightNumber() == flightNumber) {
+	if (aircraftList_.at(i).GetFlightNumber()) {
 		isFound = true;
+
 	}
 }
+
 
 if (isFound == true) {
 	std::cout << "Flight " << flightNumber << " is already in the system" << std::endl;
@@ -210,4 +52,136 @@ std::vector<Aircraft> Flightsystem::listAllAircraft() {
 
 // Listing all Aircrafts in the system
 
-std::vector<Aircraft> Flightsystem:: listAllAircraft_
+std::vector<Aircraft> Flightsystem::ListAllAircraft_() {
+	return aircraftList_;
+
+// Listing all Cruising Aircrafts in the system
+
+	std::vector<Aircraft> Flightsystem::listAllCruisingAircraft_() {
+		for (unsigned int i = 0; i < aircraftList_.size(); i++) {
+			if (aircraftList_.at(i).GetAltitude() >= 30000) {
+				cruisingAircrafts_.push_back(aircraftList_.at(i));
+			}
+		}
+		return cruisingAircrafts_;
+	}
+
+
+// Removing an Aircraft from the system
+
+std::vector <Aircraft>
+
+for (int i = 0; i < aircraftList.size(); i++) {
+
+// If the Flight Number entered by the user matches an existing Flight Number, it is removed
+
+	if (aircraftList_[i].GetFlightNumber() == flightNumber) {
+		aircraftList_.erase(aircraftList_begin() + i);
+	}
+
+// If the Flight Number entered by the user does not match  any existing Flight Numbers, an error appears
+
+	else if (i + 1 == aircraftList_.size() + 1) {
+		std::cout << "Flight Number: " << flightNumber << " is not in the system.";
+		return;
+
+
+// Changing the Heading of an existing Aircraft
+
+		void changeHeading(std::string flightNumber, int heading) {
+			for (int i = 0; i < aircraftList_.size(); i++) {
+// The Aircraft in the system with a matching Flight Number is found
+				if (aircraftList_[i].GetFlightNumber() == flightNumber) {
+// The Aircraft's new heading is input by the user
+					aircraftList_[i].SetHeading(heading);
+// The Aircraft's new heading is displayed on the interface
+					std::cout << "The heading of Flight Number: " << flightNumber << " has been changed to " << aircraftList_[i].GetHeading() << std::endl;
+				}
+// If Aircraft is not in the system, an error message appears
+				else if (i == aircraftList_.size() - 1) {
+					std::cout << "Flight Number: " << flightNumber << " is not in the system." << std::endl;
+					return;
+				}
+			}
+		}
+
+
+// Getting the Heading of an existing Aircraft
+
+		int GetHeading(std::string flightNumber) {
+			for (int i = 0; i < aircraftList_.size(); i++) {
+// The Aircraft in the system with a matching Flight Number is found
+				if (aircraftList_[i].GetFlightNumber() == flightNumber) {
+					return aircaftList_[i].GetHeading();
+				}
+// If Aircraft is not in the system, an error message appears
+				else if (i == aircraftList_.size() - 1) {
+					std::cout << "Flight Number: " << flightNumber << " is not in the system." << std::endl;
+
+				}
+			}
+		}
+
+
+// Changing the Altitude of an existing Aircraft
+
+		void ChangeHeading(std::string flightNumber) {
+			for (int i = 0; i < aircraftList.size(); i++) {
+// The Aircraft in the system with a matching Flight Number is Found
+		    if (aircraftList_[i].GetFlightNumber() == flightNumber) {
+// The Aircraft's new Altitude is input by the user
+			aircraftList_[i]SetAltitude(altitude)
+// The Aircraft's new Altitude is displayed on the interface
+			std::cout << "The Altitude of Flight Number: " << flightNumber << " has been changed to " << aircraftList_[i].GetAltitude << std::endl;
+// If Aircraft is not in the system, an error message appears
+			else if (i == aircraftList_.size() - 1) {
+			std::cout << "Flight Number: " << flightNumber << " is not in the system." << std::endl;
+			return;
+// Warning for Collision 
+			for (int h = 0; h < aircraftList_.size(); h++) {
+				if (aircraftList_.at(i).GetGridReference() == aircraftList_.at(h).GetGrid() && aircraftList_.at(i).GetFlightNumber() != aircraftList_.at(j).GetFlightNumber()) {
+					int number;
+					if (altitude > aircraftList_.at(h).GetAltitude()) {
+						number = altitude - aircraftList_.at(h).GetAltitude();
+					}
+					else if (altitude < aircraftList_.at(h).GetAltitude()) {
+						number = aircraftList_.at(h).GetAltitude() - altitude;
+					}
+					else {
+						number = 0;
+					}
+					if (number <= 3000) {
+						std::cout << "Warning - Aircraft collision possible between " << aircraftList_.at(i).GetFlightNumber() << " and " << aircraftList_.at(h).GetFlightNumber() << std::endl;
+					}
+				}
+			}
+				}
+				}
+			}
+
+
+// Getting the Altitude of an existing Aircraft
+
+			int GetAltitude(std::string flightNumber) {
+				for (int i = 0; i < aircraftList_.size(); i++) {
+// The Aircraft in the system with a matching Flight Number is found
+				if (aircraftList_[i].GetFlightNymber() == flightNumber) {
+				return aircaftList_[i].GetAltitude();
+					}
+// If Aircraft is not in the system, an error message appears
+				else if (i == aircraftList_.size() - 1) {
+				std::cout << "Flight Number: " << flightNumber << " is not in the system." << std::endl;
+
+					}
+				}
+			}
+
+// Listing the number of Aircrafts in the sector
+
+			Flightsystem::NumAircraftInSector_() {
+				numOfAircraft = size(aircraftList_);
+				return numOfAircraft;
+			}
+				
+
+   
